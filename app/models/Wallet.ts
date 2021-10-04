@@ -19,8 +19,10 @@ const Wallet = types
     setBalance(balance: number) {
       self.balance = balance;
     },
+  }))
+  .actions((self) => ({
     getBalance: flow(function* () {
-      (self as any).setBalance(yield connection.getBalance(self._pubkey));
+      self.setBalance(yield connection.getBalance(self._pubkey));
     }),
   }));
 
