@@ -5,5 +5,9 @@
   "permissions": ["<all_urls>", "webRequest", "webRequestBlocking", "storage"],
   "browser_action": {
     "default_popup": "app/web-build/index.html"
+  },
+  "background": {
+    "scripts": ["extension/background.js"],
+    "persistent": true
   }
 }
