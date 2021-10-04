@@ -24,7 +24,12 @@ export default function RPC() {
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} onChangeText={setText} value={text} />
+      <TextInput
+        style={styles.input}
+        onChangeText={setText}
+        value={text}
+        placeholder="https://custom-rpc.example.com"
+      />
       <Button
         onPress={() => {
           if (Platform.OS !== "web") return;
