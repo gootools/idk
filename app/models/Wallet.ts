@@ -23,6 +23,16 @@ const Wallet = types
   .actions((self) => ({
     getBalance: flow(function* () {
       self.setBalance(yield connection.getBalance(self._pubkey));
+
+      // const { value: tokens } = yield connection.getParsedTokenAccountsByOwner(
+      //   self._pubkey,
+      //   {
+      //     programId: new PublicKey(
+      //       "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+      //     ),
+      //   }
+      // );
+      // console.log({ tokens });
     }),
   }));
 
