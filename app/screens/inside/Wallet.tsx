@@ -1,10 +1,9 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import store from "../../models";
 
 const Wallet = observer(() => {
-  const [balance, setBalance] = useState<number>();
   useEffect(() => {
     store.wallets[0].getBalance();
   });
