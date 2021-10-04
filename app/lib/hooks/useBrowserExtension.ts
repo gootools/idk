@@ -1,16 +1,16 @@
 import { useLayoutEffect } from "react";
-import { Platform } from "react-native";
+import store from "../../models";
 
 const useBrowserExtension = () => {
   useLayoutEffect(() => {
-    if (Platform.OS !== "web") return;
+    if (!store.isBrowserExtension) return;
     const body = document?.querySelector("body");
     if (body) {
       body.style.width = "320px";
       body.style.height = "568px";
       body.style.backgroundColor = "black";
     }
-  }, [Platform.OS]);
+  }, [store.isBrowserExtension]);
 
   return null;
 };

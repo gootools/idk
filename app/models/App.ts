@@ -12,7 +12,8 @@ const App = types
       return self.wallets.length > 0;
     },
     get isBrowserExtension() {
-      return Platform.OS === "web";
+      // https://stackoverflow.com/a/22563123
+      return Platform.OS === "web" && chrome?.runtime?.id;
     },
   }))
   .actions((self) => ({
