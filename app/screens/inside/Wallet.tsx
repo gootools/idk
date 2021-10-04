@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import tw from "../../lib/tailwind";
 import store from "../../models";
 
 const Wallet = observer(() => {
@@ -10,7 +11,7 @@ const Wallet = observer(() => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
+      <Text style={tw`text-xl text-white font-bold`}>
         {store.activeWallet?.formattedBalance ?? "loading"}
       </Text>
     </View>
@@ -20,9 +21,6 @@ const Wallet = observer(() => {
 export default Wallet;
 
 const styles = StyleSheet.create({
-  text: {
-    color: "red",
-  },
   container: {
     flex: 1,
     alignItems: "center",

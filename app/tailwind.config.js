@@ -26,6 +26,12 @@ module.exports = {
       red: colors.rose,
       yellow: colors.amber,
     },
+    fontSize: {
+      sm: ["16px", "24px"],
+      base: ["20px", "28px"],
+      lg: ["24px", "32px"],
+      xl: ["26px", "34px"],
+    },
   },
   // fontFamily: {
   //   sans: ["Graphik", "sans-serif"],
