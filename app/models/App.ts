@@ -1,5 +1,5 @@
 import { PublicKey } from "@solana/web3.js";
-import { types } from "mobx-state-tree";
+import { destroy, types } from "mobx-state-tree";
 import { Platform } from "react-native";
 import Wallet from "./Wallet";
 
@@ -16,7 +16,7 @@ const App = types
       return Boolean(Platform.OS === "web" && chrome?.runtime?.id);
     },
     get activeWallet() {
-      return self.wallets[0];
+      return self.wallets.length > 0 ? self.wallets[0] : undefined;
     },
   }))
   .actions((self) => ({
@@ -31,6 +31,11 @@ const App = types
           rej("invalid pubkey");
         }
       });
+    },
+    signout() {
+      while (self.wallets.length > 0) {
+        destroy(self.wallets.pop());
+      }
     },
   }));
 
