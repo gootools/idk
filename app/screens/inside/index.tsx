@@ -12,7 +12,12 @@ const Tab = createBottomTabNavigator();
 export default function Inside() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}
+      >
         <Tab.Screen name="Feed" component={Feed} />
         <Tab.Screen name="Wallet" component={Wallet} />
         {Platform.OS === "web" && <Tab.Screen name="RPC" component={RPC} />}
