@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "cd app && yarn start",
+    "start:ios": "cd app && yarn start:ios",
+    "start:web": "cd app && yarn start:web",
+    "build:web": "cd app && yarn build:web"
+  }
+}

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useLayoutEffect } from "react";
 import { Button, Platform, StyleSheet, TextInput, View } from "react-native";
 
@@ -33,7 +32,6 @@ export default function RPC() {
         }}
         title="Save"
       />
-      <StatusBar style="auto" />
     </View>
   );
 }
