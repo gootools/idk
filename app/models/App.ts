@@ -15,6 +15,9 @@ const App = types
       // https://stackoverflow.com/a/22563123
       return Platform.OS === "web" && chrome?.runtime?.id;
     },
+    get activeWallet() {
+      return self.wallets[0];
+    },
   }))
   .actions((self) => ({
     addWallet(pubkey: string) {

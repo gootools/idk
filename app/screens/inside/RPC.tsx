@@ -1,9 +1,17 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { Button, Platform, StyleSheet, TextInput, View } from "react-native";
+import {
+  Button,
+  Platform,
+  StyleSheet,
+  Switch,
+  TextInput,
+  View,
+} from "react-native";
 import store from "../../models";
 
 export default function RPC() {
   const [text, setText] = React.useState("");
+  const [isEnabled, setIsEnabled] = React.useState(false);
 
   useEffect(() => {
     if (!store.isBrowserExtension) return;
@@ -37,6 +45,25 @@ export default function RPC() {
           chrome?.runtime?.reload();
         }}
         title="Save"
+      />
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={() => {
+          setIsEnabled(!isEnabled);
+
+          if (store.isBrowserExtension) {
+            chrome?.browserAction?.setIcon({
+              path: {
+                "128": isEnabled
+                  ? "../assets/black.png"
+                  : "../assets/green.png",
+              },
+            });
+          }
+        }}
+        value={isEnabled}
       />
     </View>
   );

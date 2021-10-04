@@ -6,6 +6,7 @@
   "browser_action": {
     "default_popup": "app/web-build/index.html"
   },
+  "icons": { "128": "app/assets/black.png" },
   "background": {
     "scripts": ["extension/background.js"],
     "persistent": true

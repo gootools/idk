@@ -5,13 +5,13 @@ import store from "../../models";
 
 const Wallet = observer(() => {
   useEffect(() => {
-    store.wallets[0].getBalance();
+    store.activeWallet.getBalance();
   });
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        {store.wallets[0].formattedBalance ?? "loading"}
+        {store.activeWallet.formattedBalance ?? "loading"}
       </Text>
     </View>
   );
