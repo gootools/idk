@@ -34,6 +34,7 @@ export default function Inside() {
           headerShown: false,
           tabBarShowLabel: store.isBrowserExtension,
         })}
+        initialRouteName="Wallet"
       >
         <Tab.Screen name="Feed" component={Feed} />
         <Tab.Screen name="Wallet" component={Wallet} />
