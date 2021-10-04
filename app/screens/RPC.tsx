@@ -1,13 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useLayoutEffect } from "react";
-import {
-  Button,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Button, Platform, StyleSheet, TextInput, View } from "react-native";
 
 export default function RPC() {
   const [text, setText] = React.useState("");
@@ -32,9 +25,6 @@ export default function RPC() {
   return (
     <View style={styles.container}>
       <TextInput style={styles.input} onChangeText={setText} value={text} />
-      <Text style={styles.text}>
-        Open up App.tsx to start working on your app!
-      </Text>
       <Button
         onPress={() => {
           if (Platform.OS !== "web") return;
@@ -49,9 +39,6 @@ export default function RPC() {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    color: "white",
-  },
   input: {
     height: 40,
     margin: 12,
