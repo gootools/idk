@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+} from "react-native";
+import tw from "../lib/tailwind";
 import store from "../models";
 
 export default function Entry() {
@@ -16,28 +24,32 @@ export default function Entry() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Enter your wallet address below to begin</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <Text style={tw`text-lg text-white font-medium`}>
+        Enter your address below to begin
+      </Text>
       {!isValid && <Text style={{ color: "red" }}>Invalid pubkey</Text>}
       <TextInput
-        style={styles.input}
-        onChangeText={setPubkey}
-        value={pubkey}
-        autoFocus
-        autoCorrect={false}
         autoCapitalize="none"
         autoCompleteType="off"
+        autoCorrect={false}
+        autoFocus
+        keyboardType="ascii-capable"
+        onChangeText={setPubkey}
         onSubmitEditing={handleSubmit}
+        placeholder="Abcdefg0123456789abCDEFgh0123456789ABcdefgh1"
+        style={styles.input}
+        value={pubkey}
       />
       <Button onPress={handleSubmit} title="Go" />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
-    color: "white",
-  },
   container: {
     flex: 1,
     alignItems: "center",
