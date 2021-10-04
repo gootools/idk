@@ -1,5 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import { types } from "mobx-state-tree";
+import { Platform } from "react-native";
 import Wallet from "./Wallet";
 
 const App = types
@@ -7,8 +8,11 @@ const App = types
     wallets: types.array(Wallet),
   })
   .views((self) => ({
-    get hasWallet() {
+    get isInside() {
       return self.wallets.length > 0;
+    },
+    get isBrowserExtension() {
+      return Platform.OS === "web";
     },
   }))
   .actions((self) => ({

@@ -1,25 +1,26 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { Button, Platform, StyleSheet, TextInput, View } from "react-native";
+import store from "../../models";
 
 export default function RPC() {
   const [text, setText] = React.useState("");
 
   useEffect(() => {
-    if (Platform.OS !== "web") return;
+    if (!store.isBrowserExtension) return;
     chrome?.storage?.local?.get("url", (data: any) => {
       setText(data["url"] ?? "");
     });
-  }, []);
+  }, [store.isBrowserExtension]);
 
   useLayoutEffect(() => {
-    if (Platform.OS !== "web") return;
+    if (!store.isBrowserExtension) return;
     const body = document?.querySelector("body");
     if (body) {
       body.style.width = "320px";
       body.style.height = "568px";
       body.style.backgroundColor = "black";
     }
-  }, []);
+  }, [store.isBrowserExtension]);
 
   return (
     <View style={styles.container}>
