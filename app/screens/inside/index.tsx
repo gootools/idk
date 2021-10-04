@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { Platform } from "react-native";
+import store from "../../models";
 import Feed from "./Feed";
 import RPC from "./RPC";
 import Settings from "./Settings";
@@ -31,7 +32,7 @@ export default function Inside() {
             }
           },
           headerShown: false,
-          tabBarShowLabel: false,
+          tabBarShowLabel: store.isBrowserExtension,
         })}
       >
         <Tab.Screen name="Feed" component={Feed} />
