@@ -30,7 +30,7 @@ export default function RPC() {
         Enter a custom RPC address below to use that instead
       </Text>
       <TextInput
-        style={tw`bg-white py-3 px-2 block w-full shadow-sm rounded-md mb-4`}
+        style={tw`bg-white py-3 px-2 w-full shadow-sm rounded-md mb-4`}
         onChangeText={setText}
         value={text}
         placeholder="https://custom-rpc.example.com"
