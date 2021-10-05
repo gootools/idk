@@ -42,10 +42,10 @@ export default function Inside() {
         <Tab.Screen name="Feed" component={Feed} />
         <Tab.Screen name="Wallet" component={Wallet} />
         {Platform.OS === "web" && <Tab.Screen name="RPC" component={RPC} />}
-        <Tab.Screen name="Settings" component={Settings} />
         {Platform.OS !== "web" && (
           <Tab.Screen name="Browser" component={Browser} />
         )}
+        <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>
   );
