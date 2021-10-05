@@ -1,12 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import {
-  Button,
-  Platform,
-  StyleSheet,
-  Switch,
-  TextInput,
-  View,
-} from "react-native";
+import { StyleSheet, Switch, Text, TextInput, View } from "react-native";
+import tw from "../../lib/tailwind";
 import store from "../../models";
 
 export default function RPC() {
@@ -32,23 +26,26 @@ export default function RPC() {
 
   return (
     <View style={styles.container}>
+      <Text style={tw`text-lg text-white font-bold mb-4`}>
+        Enter a custom RPC address below to use that instead
+      </Text>
       <TextInput
-        style={styles.input}
+        style={tw`bg-white py-3 px-2 block w-full shadow-sm rounded-md mb-4`}
         onChangeText={setText}
         value={text}
         placeholder="https://custom-rpc.example.com"
       />
-      <Button
+      {/* <Button
         onPress={() => {
           if (Platform.OS !== "web") return;
           chrome?.storage?.local?.set({ url: text });
           chrome?.runtime?.reload();
         }}
         title="Save"
-      />
+      /> */}
       <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        trackColor={{ false: "#767577", true: "#1DF1D8" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#D720C6"}
         ios_backgroundColor="#3e3e3e"
         onValueChange={() => {
           setIsEnabled(!isEnabled);
@@ -82,5 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 15,
+    backgroundColor: "#444",
   },
 });
