@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { Platform } from "react-native";
 import store from "../../models";
+import Browser from "./Browser";
 import Feed from "./Feed";
 import RPC from "./RPC";
 import Settings from "./Settings";
@@ -23,6 +24,8 @@ export default function Inside() {
                 return <Ionicons name="ios-notifications" {...props} />;
               case "Wallet":
                 return <MaterialCommunityIcons name="cash-usd" {...props} />;
+              case "Browser":
+                return <Ionicons name="ios-browsers" {...props} />;
               case "Settings":
                 return <Ionicons name="ios-settings" {...props} />;
               default:
@@ -40,6 +43,9 @@ export default function Inside() {
         <Tab.Screen name="Wallet" component={Wallet} />
         {Platform.OS === "web" && <Tab.Screen name="RPC" component={RPC} />}
         <Tab.Screen name="Settings" component={Settings} />
+        {Platform.OS !== "web" && (
+          <Tab.Screen name="Browser" component={Browser} />
+        )}
       </Tab.Navigator>
     </NavigationContainer>
   );
