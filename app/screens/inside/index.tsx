@@ -18,7 +18,7 @@ export default function Inside() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {
-            const props = { size: 28, color: focused ? "green" : "black" };
+            const props = { size: 28, color: focused ? "#eee" : "#444" };
             switch (route.name) {
               case "Feed":
                 return <Ionicons name="ios-notifications" {...props} />;
@@ -36,6 +36,10 @@ export default function Inside() {
           },
           headerShown: false,
           tabBarShowLabel: store.isBrowserExtension,
+          tabBarStyle: {
+            backgroundColor: "#111",
+            borderTopWidth: 0,
+          },
         })}
         initialRouteName="Wallet"
       >
