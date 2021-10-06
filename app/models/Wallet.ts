@@ -1,6 +1,6 @@
 import { flow } from "mobx";
 import { types } from "mobx-state-tree";
-import getMetadata from "../lib/metaplex/getMetadata";
+import getMultipleMetadata from "../lib/metaplex/getMultipleMetadata";
 import { connection, getTokens, PublicKey } from "../lib/solana";
 
 const Wallet = types
@@ -26,16 +26,8 @@ const Wallet = types
       self.setBalance(yield connection.getBalance(self._pubkey));
 
       const tokens = yield getTokens(self._pubkey);
-      const metas = [];
 
-      for (const mint of tokens
-        .map((token: any) => token?.account?.data?.parsed?.info?.mint)
-        .filter(Boolean)) {
-        const meta = yield getMetadata(mint.toString());
-        if (meta) {
-          metas.push(meta);
-        }
-      }
+      const metas = yield getMultipleMetadata(tokens);
 
       console.log({ metas, tokens });
     }),
