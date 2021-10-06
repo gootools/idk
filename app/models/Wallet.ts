@@ -1,6 +1,7 @@
 import { flow } from "mobx";
 import { types } from "mobx-state-tree";
-import { connection, PublicKey } from "../lib/solana";
+import getMetadata from "../lib/metaplex/getMetadata";
+import { connection, getTokens, PublicKey } from "../lib/solana";
 
 const Wallet = types
   .model("Wallet", {
@@ -24,15 +25,19 @@ const Wallet = types
     getBalance: flow(function* () {
       self.setBalance(yield connection.getBalance(self._pubkey));
 
-      // const { value: tokens } = yield connection.getParsedTokenAccountsByOwner(
-      //   self._pubkey,
-      //   {
-      //     programId: new PublicKey(
-      //       "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-      //     ),
-      //   }
-      // );
-      // console.log({ tokens });
+      const tokens = yield getTokens(self._pubkey);
+      const metas = [];
+
+      for (const mint of tokens
+        .map((token: any) => token?.account?.data?.parsed?.info?.mint)
+        .filter(Boolean)) {
+        const meta = yield getMetadata(mint.toString());
+        if (meta) {
+          metas.push(meta);
+        }
+      }
+
+      console.log({ metas, tokens });
     }),
   }));
 
