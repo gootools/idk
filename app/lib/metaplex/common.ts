@@ -1,5 +1,5 @@
+import { PublicKey } from "@solana/web3.js";
 import { Buffer } from "buffer";
-import { PublicKey } from "../solana";
 
 const metadataBuffer = Buffer.from("metadata");
 

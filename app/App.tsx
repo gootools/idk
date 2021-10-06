@@ -1,21 +1,10 @@
-require("isomorphic-webcrypto");
-
-import { StatusBar } from "expo-status-bar";
-import { observer } from "mobx-react-lite";
 import React from "react";
 import useBrowserExtension from "./lib/hooks/useBrowserExtension";
-import store from "./models";
-import Entry from "./screens/Entry";
-import Inside from "./screens/inside";
+import SharedApp from "./SharedApp";
 
-const Inner = observer(() => (store.isInside ? <Inside /> : <Entry />));
-
-export default function App() {
+const WebApp: React.FC = () => {
   useBrowserExtension();
-  return (
-    <>
-      <Inner />
-      <StatusBar style="light" />
-    </>
-  );
-}
+  return <SharedApp />;
+};
+
+export default WebApp;

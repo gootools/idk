@@ -1,5 +1,9 @@
-if (process.env.NODE_ENV !== "test") {
+if (
+  require("react-native").Platform.OS !== "web" &&
+  process?.env?.NODE_ENV !== "test"
+) {
   require("react-native-url-polyfill/auto");
+  global.Buffer = require("buffer").Buffer;
 }
 
 import {
