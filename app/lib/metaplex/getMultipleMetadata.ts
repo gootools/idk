@@ -17,24 +17,24 @@ const getMultipleMetadata = async (tokens: any[]) => {
 
     const responses = await connection.getMultipleAccountsInfo(pks);
 
-    return await Promise.all(
-      responses
-        .filter((r) => r?.data)
-        .map(
-          (response) =>
-            new Promise(async (res) => {
-              try {
-                const metadata = decodeMetadata(response!.data);
-                const { data: nftData } = await axios.get(metadata.data.uri);
-                res(nftData);
-              } catch (err) {}
-            })
-        )
-        .filter(Boolean)
-    );
+    return (
+      await Promise.all(
+        responses
+          .filter((r) => r?.data)
+          .map(
+            (response) =>
+              new Promise(async (res) => {
+                try {
+                  const metadata = decodeMetadata(response!.data);
+                  const { data: nftData } = await axios.get(metadata.data.uri);
+                  res(nftData);
+                } catch (err) {}
+              })
+          )
+      )
+    ).filter(Boolean);
   } catch (err) {
     console.error(err);
-  } finally {
     return [];
   }
 };
