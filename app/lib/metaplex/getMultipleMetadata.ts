@@ -9,8 +9,7 @@ const getMultipleMetadata = async (tokens: any[]) => {
       .map((token: any) => token?.account?.data?.parsed?.info?.mint)
       .filter(Boolean);
 
-    const pks = [];
-
+    const pks: any[] = [];
     for (const mint of mints) {
       const [pk] = await findMetadataAccount(mint);
       pks.push(pk);
@@ -35,8 +34,8 @@ const getMultipleMetadata = async (tokens: any[]) => {
     );
   } catch (err) {
     console.error(err);
-
-    return null;
+  } finally {
+    return [];
   }
 };
 

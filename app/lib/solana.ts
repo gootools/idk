@@ -1,6 +1,5 @@
 if (process.env.NODE_ENV !== "test") {
   require("react-native-url-polyfill/auto");
-  require("isomorphic-webcrypto");
 }
 
 import {

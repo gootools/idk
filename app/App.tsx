@@ -1,3 +1,5 @@
+require("isomorphic-webcrypto");
+
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import React from "react";
