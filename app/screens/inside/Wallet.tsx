@@ -1,7 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import GooPubkeyInput from "../../components/GooPubkeyInput";
 import tw from "../../lib/tailwind";
 import store from "../../models";
@@ -16,6 +24,15 @@ const SingleWallet: React.FC<any> = observer(({ navigation }) => {
       <Text style={tw`text-xl text-white font-bold`}>
         {store.activeWallet?.formattedBalance ?? "loading"}
       </Text>
+      <ScrollView style={{ height: 200 }}>
+        {store.activeWallet?.nfts.map((n) => (
+          <Image
+            key={n.image}
+            source={{ uri: n.image }}
+            style={{ width: 100, height: 100 }}
+          />
+        ))}
+      </ScrollView>
       <View>
         <FlatList
           keyExtractor={({ pubkey }) => pubkey}
