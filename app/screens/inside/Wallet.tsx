@@ -72,20 +72,21 @@ const AllWallets: React.FC<any> = observer(({ navigation }) => {
             <Text style={tw`text-xl text-white font-bold`}>
               {i + 1}) {`${wallet.formattedBalance} SOL` ?? "loading"}
             </Text>
-            <View style={tw`flex p-4`}>
-              {wallet.nfts.map((n) => (
+            <View style={tw`flex p-4 flex-row flex-wrap`}>
+              {wallet.nfts.map((n, i) => (
                 <View
-                  key={n.image}
+                  key={i}
                   style={{
+                    display: "flex",
                     position: "relative",
-                    width: 170,
-                    height: 170,
-                    marginBottom: 10,
+                    width: 180,
+                    height: 180,
+                    margin: 5,
                   }}
                 >
                   <Image
                     source={{ uri: n.image }}
-                    style={tw`rounded h-full w-full`}
+                    style={tw`rounded h-[180px] w-[180px]`}
                   />
                   {n.isWumbo && (
                     <Image
