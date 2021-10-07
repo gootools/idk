@@ -32,6 +32,7 @@ const sites = [
 // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md#communicating-between-js-and-native
 const Browser = () => {
   const [uri, setUri] = useState("https://trade.mango.markets");
+  const [url, setUrl] = useState(uri);
 
   const runFirst = `
       // alert("Hello world");
@@ -54,18 +55,25 @@ const Browser = () => {
         ))}
       </ScrollView>
       <WebView
+        originWhitelist={["https://*"]}
         source={{
           uri,
+          // html: `<script>alert(navigator.serviceWorker)</script>`,
+        }}
+        onNavigationStateChange={(navState) => {
+          // Keep track of going back navigation within component
+          // this.canGoBack = navState.canGoBack;
+          setUrl(navState.url);
         }}
         onMessage={(_event) => {}}
-        injectedJavaScript={runFirst}
+        injectedJavaScriptBeforeContentLoaded={runFirst}
         style={{ backgroundColor: "black" }}
       />
       <View style={tw`p-4 bg-gray-800`}>
         <TextInput
           style={tw`bg-white py-3 px-2 w-full shadow-sm rounded-md`}
           placeholder="https://goo.tools"
-          value={uri}
+          value={url}
           autoCorrect={false}
           keyboardType="url"
         />

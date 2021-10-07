@@ -18,6 +18,15 @@ const App = types
     get activeWallet() {
       return self.wallets.length > 0 ? self.wallets[0] : undefined;
     },
+    async getBalance() {
+      return await Promise.all(self.wallets.map((w) => w.getBalance()));
+    },
+    get totalBalance() {
+      return (
+        self.wallets.reduce((acc, curr) => acc + (curr.balance ?? 0), 0) /
+        10 ** 9
+      );
+    },
   }))
   .actions((self) => ({
     addWallet(pubkey: string) {

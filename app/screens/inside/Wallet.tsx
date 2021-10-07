@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import GooPubkeyInput from "../../components/GooPubkeyInput";
+import HeaderDropdown from "../../components/HeaderDropdown";
 import tw from "../../lib/tailwind";
 import store from "../../models";
 
@@ -55,6 +56,65 @@ const SingleWallet: React.FC<any> = observer(({ navigation }) => {
   );
 });
 
+const AllWallets: React.FC<any> = observer(({ navigation }) => {
+  useEffect(() => {
+    store.getBalance().then(() => console.log({ w: store.wallets }));
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text style={tw`text-xl text-white font-bold`}>
+        Total: {store.totalBalance} SOL
+      </Text>
+      <ScrollView>
+        {store.wallets.map((wallet, i) => (
+          <>
+            <Text style={tw`text-xl text-white font-bold`}>
+              {i + 1}) {`${wallet.formattedBalance} SOL` ?? "loading"}
+            </Text>
+            <View style={tw`flex p-4`}>
+              {wallet.nfts.map((n) => (
+                <View
+                  key={n.image}
+                  style={{
+                    position: "relative",
+                    width: 170,
+                    height: 170,
+                    marginBottom: 10,
+                  }}
+                >
+                  <Image
+                    source={{ uri: n.image }}
+                    style={tw`rounded h-full w-full`}
+                  />
+                  {n.isWumbo && (
+                    <Image
+                      source={{
+                        uri: "https://pbs.twimg.com/profile_images/1398129901702688769/3GQuUoUq_400x400.png",
+                      }}
+                      style={{
+                        width: 70,
+                        height: 70,
+                        position: "absolute",
+                        bottom: 0,
+                        right: 0,
+                      }}
+                    />
+                  )}
+                </View>
+              ))}
+            </View>
+          </>
+        ))}
+      </ScrollView>
+      <Button
+        title="Add another wallet"
+        onPress={() => navigation.navigate("AddWallet")}
+      />
+    </View>
+  );
+});
+
 const AddWallet: React.FC<any> = ({ navigation }) => {
   return (
     <View>
@@ -70,7 +130,11 @@ const Stack = createNativeStackNavigator();
 
 const Wrapper: React.FC = () => (
   <Stack.Navigator>
-    <Stack.Screen name="SingleWallet" component={SingleWallet} />
+    <Stack.Screen
+      name="AllWallets"
+      component={AllWallets}
+      options={{ headerTitle: (props) => <HeaderDropdown {...props} /> }}
+    />
     <Stack.Screen name="AddWallet" component={AddWallet} />
   </Stack.Navigator>
 );

@@ -37,6 +37,8 @@ const Wallet = types
       self.setNFTS(metas);
 
       console.log({ metas, tokens });
+
+      return { metas, tokens };
     }),
   }));
 
