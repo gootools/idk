@@ -1,4 +1,4 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
@@ -23,7 +23,8 @@ export default function Inside() {
               case "Feed":
                 return <Ionicons name="ios-notifications" {...props} />;
               case "Wallet":
-                return <MaterialCommunityIcons name="cash-usd" {...props} />;
+                return <Entypo name="wallet" {...props} />;
+              // return <MaterialCommunityIcons name="cash-usd" {...props} />;
               case "Browser":
                 return <Ionicons name="ios-browsers" {...props} />;
               case "Settings":

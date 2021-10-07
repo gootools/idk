@@ -69,7 +69,10 @@ const AllWallets: React.FC<any> = observer(({ navigation }) => {
       <ScrollView>
         {store.wallets.map((wallet, i) => (
           <>
-            <Text style={tw`text-xl text-white font-bold`}>
+            <Text
+              style={tw`text-xl text-white font-bold`}
+              onPress={() => store.removeWallet(wallet.pubkey)}
+            >
               {i + 1}) {`${wallet.formattedBalance} SOL` ?? "loading"}
             </Text>
             <View style={tw`flex p-4 flex-row flex-wrap`}>

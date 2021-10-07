@@ -41,6 +41,12 @@ const App = types
         }
       });
     },
+    removeWallet(pubkey: string) {
+      const wallet = self.wallets.find((w) => w.pubkey === pubkey);
+      if (wallet) {
+        destroy(wallet);
+      }
+    },
     signout() {
       while (self.wallets.length > 0) {
         destroy(self.wallets.pop());
