@@ -24,12 +24,12 @@ const SingleWallet: React.FC<any> = observer(({ navigation }) => {
       <Text style={tw`text-xl text-white font-bold`}>
         {store.activeWallet?.formattedBalance ?? "loading"}
       </Text>
-      <ScrollView style={{ height: 200 }}>
+      <ScrollView style={tw`flex p-4`}>
         {store.activeWallet?.nfts.map((n) => (
           <Image
             key={n.image}
             source={{ uri: n.image }}
-            style={{ width: 100, height: 100 }}
+            style={tw`rounded h-[200px] w-[200px] m-2`}
           />
         ))}
       </ScrollView>
@@ -84,6 +84,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "black",
     display: "flex",
-    padding: 15,
   },
 });
