@@ -7,7 +7,11 @@ export default function Settings() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Settings</Text>
-      <GooButton onPress={store.signout} text="Sign out" />
+      <GooButton
+        onPress={() => alert(store.wallets[0].mnemonic)}
+        text="Export recovery phrase"
+      />
+      <GooButton onPress={store.signout} text="Sign out" color="red-500" />
     </View>
   );
 }
