@@ -22,7 +22,6 @@ const GooPubkeyInput: React.FC<any> = ({ handleSubmit }) => {
         autoCapitalize="none"
         autoCompleteType="off"
         autoCorrect={false}
-        autoFocus
         keyboardType="ascii-capable"
         onChangeText={setPubkey}
         onSubmitEditing={_handleSubmit}

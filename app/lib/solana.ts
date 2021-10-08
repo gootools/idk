@@ -3,6 +3,9 @@ if (
   process?.env?.NODE_ENV !== "test"
 ) {
   require("react-native-url-polyfill/auto");
+  // const { polyfill } = require("react-native-polyfill-globals");
+  // polyfill();
+  (global.process as any).version = "v14.17.5";
   global.Buffer = require("buffer").Buffer;
 }
 
