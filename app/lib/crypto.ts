@@ -17,11 +17,11 @@ export enum DERIVATION_PATH {
 }
 
 export function getKeypairFromSeed(
-  seed: string,
+  seed: Buffer,
   walletIndex: number,
   dPath: DERIVATION_PATH
 ) {
-  const derivedSeed = deriveSeed(seed, walletIndex, dPath);
+  const derivedSeed = deriveSeed(seed.toString("hex"), walletIndex, dPath);
   return Keypair.fromSecretKey(sign.keyPair.fromSeed(derivedSeed).secretKey);
 }
 

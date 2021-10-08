@@ -38,8 +38,7 @@ examples.forEach(({ wallet, mnemonic, publicKey, accountIndex }) => {
     const keypair = getKeypairFromSeed(
       seed,
       accountIndex,
-      DERIVATION_PATH.bip44Change,
-      0
+      DERIVATION_PATH.bip44Change
     );
 
     expect(keypair.publicKey.toBase58()).toEqual(publicKey);
