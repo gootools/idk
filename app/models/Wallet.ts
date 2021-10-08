@@ -13,7 +13,7 @@ const Wallet = types
   .views((self) => ({
     get seed() {
       const seed = mnemonicToSeedSync(self.mnemonic);
-      const keypair = getKeypairFromSeed(seed, 0, DERIVATION_PATH.bip44, 0);
+      const keypair = getKeypairFromSeed(seed, 0, DERIVATION_PATH.bip44);
       return keypair.publicKey.toBase58();
     },
     get balance() {
