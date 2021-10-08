@@ -7,9 +7,9 @@ import HeaderDropdown from "../../components/HeaderDropdown";
 import tw from "../../lib/tailwind";
 import store from "../../models";
 
-const AllWallets: React.FC<any> = observer(({ navigation }) => {
+const AllAccounts: React.FC<any> = observer(({ navigation }) => {
   useEffect(() => {
-    console.log(store.wallets[0].seed);
+    console.log(store.activeWallet?.seed);
     // store.getBalance().then(() => console.log({ w: store.wallets }));
   }, []);
 
@@ -20,14 +20,14 @@ const AllWallets: React.FC<any> = observer(({ navigation }) => {
       </Text>
 
       <Button
-        title="Add another wallet"
-        onPress={() => navigation.navigate("AddWallet")}
+        title="Add another account"
+        onPress={() => navigation.navigate("AddAccount")}
       />
     </View>
   );
 });
 
-const AddWallet: React.FC<any> = ({ navigation }) => {
+const AddAccount: React.FC<any> = ({ navigation }) => {
   return (
     <View>
       <Text>Add wallet</Text>
@@ -43,11 +43,11 @@ const Stack = createNativeStackNavigator();
 const Wrapper: React.FC = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="AllWallets"
-      component={AllWallets}
+      name="AllAccounts"
+      component={AllAccounts}
       options={{ headerTitle: (props) => <HeaderDropdown {...props} /> }}
     />
-    <Stack.Screen name="AddWallet" component={AddWallet} />
+    <Stack.Screen name="AddAccount" component={AddAccount} />
   </Stack.Navigator>
 );
 

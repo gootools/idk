@@ -8,7 +8,7 @@ export default function Settings() {
     <View style={styles.container}>
       <Text style={styles.text}>Settings</Text>
       <GooButton
-        onPress={() => alert(store.wallets[0].mnemonic)}
+        onPress={() => alert(store.activeWallet?.mnemonic)}
         text="Export recovery phrase"
       />
       <GooButton onPress={store.signout} text="Sign out" color="red-500" />
