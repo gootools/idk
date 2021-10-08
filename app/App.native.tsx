@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Suspense } from "react";
+import "react-native-url-polyfill/auto";
 import Polyfill from "react-native-webview-crypto";
 import SharedApp from "./SharedApp";
 

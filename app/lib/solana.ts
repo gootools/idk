@@ -1,13 +1,3 @@
-if (
-  require("react-native").Platform.OS !== "web" &&
-  process?.env?.NODE_ENV !== "test"
-) {
-  require("react-native-url-polyfill/auto");
-  global.Buffer = require("buffer").Buffer;
-  // XXX: events + some value seems to be required for mnemonic
-  (global.process as any).version = "v14.17.5";
-}
-
 import {
   clusterApiUrl,
   Connection,

@@ -1,60 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
-import {
-  Button,
-  FlatList,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import GooPubkeyInput from "../../components/GooPubkeyInput";
 import HeaderDropdown from "../../components/HeaderDropdown";
 import tw from "../../lib/tailwind";
 import store from "../../models";
-
-const SingleWallet: React.FC<any> = observer(({ navigation }) => {
-  useEffect(() => {
-    store.activeWallet?.getBalance();
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text style={tw`text-xl text-white font-bold`}>
-        {store.activeWallet?.formattedBalance ?? "loading"}
-      </Text>
-      <ScrollView style={tw`flex p-4`}>
-        {store.activeWallet?.nfts.map((n) => (
-          <Image
-            key={n.image}
-            source={{ uri: n.image }}
-            style={tw`rounded h-[200px] w-[200px] m-2`}
-          />
-        ))}
-      </ScrollView>
-      <View>
-        <FlatList
-          keyExtractor={({ pubkey }) => pubkey}
-          data={store.wallets}
-          renderItem={({ item }) => {
-            return (
-              <>
-                <Text style={tw`text-white`}>{item.pubkey}</Text>
-                <Text style={tw`text-red-400`}>{item.balance}</Text>
-              </>
-            );
-          }}
-        />
-      </View>
-      <Button
-        title="Add wallet"
-        onPress={() => navigation.navigate("AddWallet")}
-      />
-    </View>
-  );
-});
 
 const AllWallets: React.FC<any> = observer(({ navigation }) => {
   useEffect(() => {
@@ -66,51 +17,7 @@ const AllWallets: React.FC<any> = observer(({ navigation }) => {
       <Text style={tw`text-xl text-white font-bold`}>
         Total: {store.totalBalance} SOL
       </Text>
-      <ScrollView>
-        {store.wallets.map((wallet, i) => (
-          <>
-            <Text
-              style={tw`text-xl text-white font-bold`}
-              onPress={() => store.removeAccount(wallet.pubkey)}
-            >
-              {i + 1}) {`${wallet.formattedBalance} SOL` ?? "loading"}
-            </Text>
-            <View style={tw`flex p-4 flex-row flex-wrap`}>
-              {wallet.nfts.map((n, i) => (
-                <View
-                  key={i}
-                  style={{
-                    display: "flex",
-                    position: "relative",
-                    width: 180,
-                    height: 180,
-                    margin: 5,
-                  }}
-                >
-                  <Image
-                    source={{ uri: n.image }}
-                    style={tw`rounded h-[180px] w-[180px]`}
-                  />
-                  {n.isWumbo && (
-                    <Image
-                      source={{
-                        uri: "https://pbs.twimg.com/profile_images/1398129901702688769/3GQuUoUq_400x400.png",
-                      }}
-                      style={{
-                        width: 70,
-                        height: 70,
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                      }}
-                    />
-                  )}
-                </View>
-              ))}
-            </View>
-          </>
-        ))}
-      </ScrollView>
+
       <Button
         title="Add another wallet"
         onPress={() => navigation.navigate("AddWallet")}
