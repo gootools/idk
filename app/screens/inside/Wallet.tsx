@@ -9,7 +9,8 @@ import store from "../../models";
 
 const AllWallets: React.FC<any> = observer(({ navigation }) => {
   useEffect(() => {
-    store.getBalance().then(() => console.log({ w: store.wallets }));
+    console.log(store.wallets[0].seed);
+    // store.getBalance().then(() => console.log({ w: store.wallets }));
   }, []);
 
   return (
