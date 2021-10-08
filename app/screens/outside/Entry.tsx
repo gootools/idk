@@ -1,4 +1,3 @@
-import { mnemonicToSeed } from "bip39";
 import { entropyToMnemonic } from "ethers/lib.esm/utils";
 import { getRandomBytesAsync } from "expo-random";
 import React, { useEffect, useState } from "react";
@@ -11,27 +10,14 @@ import {
 } from "react-native";
 import GooPubkeyInput from "../../components/GooPubkeyInput";
 import tw from "../../lib/tailwind";
-// import { generateMnemonic } from "../../lib/crypto";
+import store from "../../models";
 
 export default function Entry() {
   const [phrase, setPhrase] = useState("");
 
   useEffect(() => {
     (async () => {
-      const mnemonic = entropyToMnemonic(await getRandomBytesAsync(32));
-      const seed = await mnemonicToSeed(mnemonic);
-      setPhrase(JSON.stringify({ mnemonic, seed }));
-
-      // addAccount({
-      //   passcode: "1234",
-      //   mnemonic,
-      //   seed
-      // })
-      //
-      // addAccount({
-      //   title: "first",
-      //   derivationPath: "bip44Change"
-      // })
+      setPhrase(entropyToMnemonic(await getRandomBytesAsync(32)));
     })();
   }, []);
 
@@ -41,7 +27,7 @@ export default function Entry() {
       style={styles.container}
     >
       <Text style={tw`text-lg text-white font-medium`}>{phrase}</Text>
-      <Button onPress={console.log} title="Create wallet" />
+      <Button onPress={() => store.addWallet(phrase)} title="Create wallet" />
 
       <Text style={tw`text-lg text-white font-medium`}>
         Enter your address below to begin
