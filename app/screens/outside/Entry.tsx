@@ -22,7 +22,7 @@ export default function Entry() {
       const seed = await mnemonicToSeed(mnemonic);
       setPhrase(JSON.stringify({ mnemonic, seed }));
 
-      // addWallet({
+      // addAccount({
       //   passcode: "1234",
       //   mnemonic,
       //   seed

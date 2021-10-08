@@ -10,7 +10,7 @@ const GooPubkeyInput: React.FC<any> = ({ handleSubmit }) => {
     setIsValid(true);
 
     store
-      .addWallet(pubkey)
+      .addAccount(pubkey)
       .then(() => handleSubmit())
       .catch(() => setIsValid(false));
   };

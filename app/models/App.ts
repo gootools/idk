@@ -1,55 +1,55 @@
 import { PublicKey } from "@solana/web3.js";
 import { destroy, types } from "mobx-state-tree";
 import { Platform } from "react-native";
-import Wallet from "./Wallet";
+import Account from "./Account";
 
 const App = types
   .model("App", {
-    wallets: types.array(Wallet),
+    accounts: types.array(Account),
   })
   .views((self) => ({
     get isInside() {
-      return self.wallets.length > 0;
+      return self.accounts.length > 0;
     },
     get isBrowserExtension() {
       // https://stackoverflow.com/a/22563123
       return Boolean(Platform.OS === "web" && chrome?.runtime?.id);
     },
     get activeWallet() {
-      return self.wallets.length > 0 ? self.wallets[0] : undefined;
+      return self.accounts.length > 0 ? self.accounts[0] : undefined;
     },
     async getBalance() {
-      return await Promise.all(self.wallets.map((w) => w.getBalance()));
+      return await Promise.all(self.accounts.map((w) => w.getBalance()));
     },
     get totalBalance() {
       return (
-        self.wallets.reduce((acc, curr) => acc + (curr.balance ?? 0), 0) /
+        self.accounts.reduce((acc, curr) => acc + (curr.balance ?? 0), 0) /
         10 ** 9
       );
     },
   }))
   .actions((self) => ({
-    addWallet(pubkey: string) {
+    addAccount(pubkey: string) {
       return new Promise((res, rej) => {
         try {
           new PublicKey(pubkey);
-          const wallet = Wallet.create({ pubkey });
-          self.wallets.push(wallet);
-          res(wallet);
+          const account = Account.create({ pubkey });
+          self.accounts.push(account);
+          res(account);
         } catch (err) {
           rej("invalid pubkey");
         }
       });
     },
-    removeWallet(pubkey: string) {
-      const wallet = self.wallets.find((w) => w.pubkey === pubkey);
+    removeAccount(pubkey: string) {
+      const wallet = self.accounts.find((w) => w.pubkey === pubkey);
       if (wallet) {
         destroy(wallet);
       }
     },
     signout() {
-      while (self.wallets.length > 0) {
-        destroy(self.wallets.pop());
+      while (self.accounts.length > 0) {
+        destroy(self.accounts.pop());
       }
     },
   }));

@@ -4,8 +4,8 @@ import getMultipleMetadata from "../lib/metaplex/getMultipleMetadata";
 import { connection, getTokens, PublicKey } from "../lib/solana";
 import NFT from "./NFT";
 
-const Wallet = types
-  .model("Wallet", {
+const Account = types
+  .model("Account", {
     pubkey: types.string,
     balance: types.maybe(types.number),
     nfts: types.array(NFT),
@@ -42,4 +42,4 @@ const Wallet = types
     }),
   }));
 
-export default Wallet;
+export default Account;

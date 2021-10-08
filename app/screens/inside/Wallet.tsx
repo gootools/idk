@@ -71,7 +71,7 @@ const AllWallets: React.FC<any> = observer(({ navigation }) => {
           <>
             <Text
               style={tw`text-xl text-white font-bold`}
-              onPress={() => store.removeWallet(wallet.pubkey)}
+              onPress={() => store.removeAccount(wallet.pubkey)}
             >
               {i + 1}) {`${wallet.formattedBalance} SOL` ?? "loading"}
             </Text>
